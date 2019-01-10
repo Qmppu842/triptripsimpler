@@ -1,7 +1,22 @@
-<h1>New Battle</h1>
+<h1>Duel Time!</h1>
 
 <br/>
 <%= @trip1.start  %>
 
 <br/>
 <%= @trip2.start  %>
+<!--______________-->
+<div class="Eka">
+  <!-- This seems rather hacky way to do this, but oh well for now it goes.-->
+  <%= @trip = @trip1 %>
+  <%= render partial: "arenacorner" %>
+</div>
+<!--______________-->
+<div class="form">
+
+</div>
+<!--______________-->
+<div class="Toka">
+  <%= @trip = @trip2 %>
+<%= render partial: "arenacorner" %>
+</div>
