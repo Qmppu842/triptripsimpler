@@ -39,9 +39,10 @@ class TripsController < ApplicationController
     @trip = Trip.new(trip_params)
 
     @trip.elo = 1500
-    if not @trip.link.empty?
-      @trip.link = @trip.link.split("pb=")[1].split("\" w")[0]
-    end
+    #if not @trip.link.empty?
+    #  @trip.link = @trip.link.split("pb=")[1].split("\" w")[0]
+    #end
+    @trip.link = cut_link(@trip.link)
 
     respond_to do |format|
       if @trip.save
@@ -53,10 +54,16 @@ class TripsController < ApplicationController
       end
     end
   end
-
+def cut_link(link)
+  
+  return link.split("pb=")[1].split("\" w")[0]
+end
   # PATCH/PUT /trips/1
   # PATCH/PUT /trips/1.json
   def update
+
+    @trip.link = cut_link(@trip.link)
+
     respond_to do |format|
       if @trip.update(trip_params)
         format.html { redirect_to @trip, notice: 'Trip was successfully updated.' }
