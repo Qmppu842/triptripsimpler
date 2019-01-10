@@ -2,15 +2,31 @@ class TripsController < ApplicationController
   before_action :set_trip, only: [:show, :edit, :update, :destroy]
 
   def arena
-@trips = Trip.all
+    @trips = Trip.all
 
-  #Picks 2 trips at random, can't pick same one twice.
-  @trip1 = @trips.sample;
-  @asd = @trips.index(@trip1)
-  @trips2 = @trips.slice(0,@asd)+@trips.slice(@asd+1, @trips.count)
-  @trip2= @trips2.sample
+    #Picks 2 trips at random, can't pick same one twice.
+    @trip1 = @trips.sample;
+    @asd = @trips.index(@trip1)
+    @trips2 = @trips.slice(0,@asd)+@trips.slice(@asd+1, @trips.count)
+    @trip2= @trips2.sample
+    @all_trips= ["left" => @trip1, "right" =>@trip2]
 
-  render :arena
+    render :arena
+  end
+
+  def save_arena_results
+    byebug
+    @koira = params[:title]
+    redirect_to :arena
+  end
+
+  def arena_results_left
+    byebug
+    @koira = params[:title]
+    redirect_to :arena
+  end
+  def arena_results_right
+    redirect_to :arena
   end
 
   # GET /trips

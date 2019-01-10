@@ -1,1 +1,13 @@
 <h1><%= @trip.start %></h1>
+<% if @trip.link != nil%>
+  <div>
+    <iframe class="maps" src="https://www.google.com/maps/embed?pb=<%= @trip.link %>"  width="700" height="450" frameborder="0" allowfullscreen>asd</iframe>
+  </div>
+<% end %>
+<br/>
+<h3>Info</h3>
+<p>
+<%= @trip.start %> <br/>
+<%= @trip.end %> <br/>
+<%= @trip.length %> <br/>
+</p>
