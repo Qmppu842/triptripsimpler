@@ -26,6 +26,11 @@ class TripsController < ApplicationController
   def create
     @trip = Trip.new(trip_params)
 
+    @trip.elo = 1500
+    if not @trip.link.empty?
+      @trip.link = @trip.link.split("pb=")[1].split("\" w")[0]
+    end
+
     respond_to do |format|
       if @trip.save
         format.html { redirect_to @trip, notice: 'Trip was successfully created.' }
