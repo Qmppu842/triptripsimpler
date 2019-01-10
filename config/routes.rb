@@ -5,5 +5,5 @@ Rails.application.routes.draw do
   get 'arena', to:'trips#arena'
   post 'arenaleft', to:'trips#arena_results_left'
   post 'arenaright', to:'trips#arena_results_right'
-  post 'arena', to:'trips#save_results'
+  post 'arena', to:'trips#save_arena_results'
 end

@@ -9,15 +9,47 @@ class TripsController < ApplicationController
     @asd = @trips.index(@trip1)
     @trips2 = @trips.slice(0,@asd)+@trips.slice(@asd+1, @trips.count)
     @trip2= @trips2.sample
-    @all_trips= ["left" => @trip1, "right" =>@trip2]
-
+    @all_trips= [@trip1, @trip2]
+    @tripIds = @all_trips.map { |e| e.id  }
     render :arena
   end
 
   def save_arena_results
+    right = Trip.find_by id: params[:right]
+    left = Trip.find_by id: params[:left]
+    toggle = params[:toggle]
+    #puts "printeeriiii!!!"
+    #puts "moiii" + toggle
+    k = 100
+    #puts "asd " +p1.to_s
+    left_elo = left.elo
+    right_elo = right.elo
+    #puts "kalaaaaa " +left_elo.to_s
+
+    p1 = (1.0/(1.0+10**((left_elo - 1000)/400)))
+    p2 = (1.0/(1.0+10**((right_elo - 1000)/400)))
+
+    #if toggle == $left.id
+
+      #left_elo = $left.elo+ k*(1-p1)
+    #  right_elo = $right.elo+ k*(0-p2)
+
+    #elsif toggle == $right.id
+      left_elo = left.elo+ k*(0-p1)
+      right_elo = right.elo+ k*(1-p2)
+
+    #end
+    #puts "hahah" + $left.elo.to_s
     byebug
-    @koira = params[:title]
-    redirect_to :arena
+    #p2 = (1.0/(1.0+10**(($right.elo - $left.elo)/400)))
+    left.update(elo: left_elo)
+    #asd = Trip.new( start: "Sarajevo", end:"Vienna", elo: left_elo)
+    left.save
+
+    right.update(elo: right_elo)
+    right.save
+    #asd.save
+    redirect_to :root
   end
 
   def arena_results_left
@@ -54,7 +86,7 @@ class TripsController < ApplicationController
   def create
     @trip = Trip.new(trip_params)
 
-    @trip.elo = 1500
+    #@trip.elo = 1500
     #if not @trip.link.empty?
     #  @trip.link = @trip.link.split("pb=")[1].split("\" w")[0]
     #end

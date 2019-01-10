@@ -1,10 +1,5 @@
 <h1>Duel Time!</h1>
 
-<br/>
-<%= @trip1.start  %>
-
-<br/>
-<%= @trip2.start  %>
 <!--______________-->
 <div class="Eka">
   <!-- This seems rather hacky way to do this, but oh well for now it goes.-->
@@ -59,11 +54,30 @@
 
   <%= form_tag("/arena", method: "post") do  %>
 
+  <!--<div class="field">
+    <%= label_tag :betterOne,"And the better one is:",  :style => "display:inline" %>
+    <%= select_tag("betterOne", options_from_collection_for_select(@all_trips, 'id' ,'start'), include_blank:false, :style => "display:inline") %>
+  </div>-->
+
   <div class="field">
-    <%= label_tag "Choose one" %>
-    <%= select_tag("betterOne", options_for_select(@all_trips, 1)) %>
+    <div class="radios" >
+      <%= label_tag(:toggle_, "Left one!", :style => "display:inline") %>
+      <%= radio_button_tag(:toggle, @tripIds[1], autofocus: true) %>
+    </div>
+
+    <div class="radios" >
+      <%= label_tag(:trip2, "Draw!",:style => "display:inline") %>
+      <%= radio_button_tag(:toggle, -1) %>
+    </div>
+    <div class="radios" >
+      <%= label_tag(:trip2, "Right one!",:style => "display:inline") %>
+      <%= radio_button_tag(:toggle, @tripIds[0]) %>
+    </div>
   </div>
+
   <div class = "field">
+    <%= hidden_field_tag("left", @tripIds[0]) %>
+    <%= hidden_field_tag("right", @tripIds[1]) %>
     <%= submit_tag("Lay down your judgement!") %>
   </div>
 <% end %>
