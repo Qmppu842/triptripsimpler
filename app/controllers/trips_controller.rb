@@ -74,7 +74,7 @@ class TripsController < ApplicationController
   def create
     @trip = Trip.new(trip_params)
 
-    #@trip.elo = 1500
+    @trip.elo = 1500
     #if not @trip.link.empty?
     #  @trip.link = @trip.link.split("pb=")[1].split("\" w")[0]
     #end
