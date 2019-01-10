@@ -24,23 +24,35 @@ class TripsController < ApplicationController
     #puts "asd " +p1.to_s
     left_elo = left.elo
     right_elo = right.elo
+    left_id = left.id
+    right_id = right.id
     #puts "kalaaaaa " +left_elo.to_s
 
-    p1 = (1.0/(1.0+10**((left_elo - 1000)/400)))
-    p2 = (1.0/(1.0+10**((right_elo - 1000)/400)))
+    p1 = (1.0/(1.0+10**((left_elo - right_elo)/400)))
+    p2 = (1.0/(1.0+10**((right_elo - left_elo)/400)))
+    elo_win = k*(1.0-p1)
+    elo_lose = k*(1.0-p2)
+    if toggle == left_id
+      #elo_win = k*(1.0-p1)
+      left_elo = left_elo+ elo_win
 
-    #if toggle == $left.id
+      right_elo = right_elo-elo_win#+ k*(0.0-p2)
 
-      #left_elo = $left.elo+ k*(1-p1)
-    #  right_elo = $right.elo+ k*(0-p2)
+    else
 
-    #elsif toggle == $right.id
-      left_elo = left.elo+ k*(0-p1)
-      right_elo = right.elo+ k*(1-p2)
+      left_elo = left_elo-elo_lose
+      right_elo = right_elo+elo_lose
+      #left_elo = left_elo+ k*(0.0-p1)
+      #right_elo = right_elo+ k*(1-p2)
 
-    #end
+    end
     #puts "hahah" + $left.elo.to_s
-    byebug
+    puts p1
+    #p3 = (1.0/(1.0+10**((left_elo - right_elo)/400)))
+    #byebug
+    #p4 = (1.0/(1.0+10**((right_elo - left_elo)/400)))
+
+    #toggle = params[:toggle]
     #p2 = (1.0/(1.0+10**(($right.elo - $left.elo)/400)))
     left.update(elo: left_elo)
     #asd = Trip.new( start: "Sarajevo", end:"Vienna", elo: left_elo)
