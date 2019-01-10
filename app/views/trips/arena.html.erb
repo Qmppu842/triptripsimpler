@@ -1,24 +1,25 @@
 <h1>Duel Time!</h1>
 
 <!--______________-->
-<div class="Eka">
+<div class="row">
+<div class="column">
   <!-- This seems rather hacky way to do this, but oh well for now it goes.-->
   <% @trip = @trip1 %>
   <%= render partial: "arenacorner" %>
 </div>
 <!--______________-->
-<div class="form">
+<div class="column">
   <%= form_tag("/arena", method: "post") do  %>
 
   <div class="field">
     <div class="radios" >
-      <%= label_tag(:toggle_, "Left one!", :style => "display:inline") %>
       <%= radio_button_tag(:toggle, @tripIds[1], autofocus: true) %>
+        <%= label_tag(:toggle_, "Left one!", :style => "display:inline") %>
     </div>
 
     <div class="radios" >
-      <%= label_tag(:trip2, "Right one!",:style => "display:inline") %>
       <%= radio_button_tag(:toggle, @tripIds[0]) %>
+      <%= label_tag(:trip2, "Right one!",:style => "display:inline") %>
     </div>
   </div>
 
@@ -28,10 +29,11 @@
     <%= submit_tag("Lay down your judgement!") %>
   </div>
 <% end %>
-
 </div>
 <!--______________-->
-<div class="Toka">
+<div class="column">
   <% @trip = @trip2 %>
   <%= render partial: "arenacorner" %>
+</div>
+
 </div>

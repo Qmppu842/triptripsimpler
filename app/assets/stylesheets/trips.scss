@@ -1,6 +1,14 @@
 // Place all the styles related to the Trips controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
 .radios{
   border-radius: 1px;
   border-color: white;
@@ -24,4 +32,26 @@ table {
 
            tr:nth-child(even) {
                background-color: #f2f2f2
+}
+
+.column {
+  float: left;
+  width: 33%;
+  padding: 15px;
+}
+
+.leftcontent{
+  float:left;
+}
+.rightcontent{
+  float:left;
+}
+.forma{
+  float:none;
+  position: absolute;
+}
+.field{
+  background-color: grey;
+  color: white;
+  text-align: center;
 }
