@@ -8,56 +8,7 @@
 </div>
 <!--______________-->
 <div class="form">
-  <!--<form action="/arena" method="post">
-    <% @bettertrip %>
-    <input name="bettertrip1" type="button" onclick=" <% @bettertrip = @trip1%>" value="Left one!">
-    <input name="bettertrip1" type="button" onclick=" <% @bettertrip = @trip2%>" value="Right one!">
-    <br/>
-    <div>
-      <input name="commit" type="submit" value="Lay down your judgement!">
-      <p>
-        <% if not @bettertrip.nil?%>
-          <%= @bettertrip %>
-        <% end %>
-      </p>
-    </div>
-  </form>-->
-<!--______________-->
-<!--<%= form_tag("/arenaleft", method: "post") do  %>
-
-    <%= radio_button_tag(:toggle, "on" ,@trip1, ) %>
-    <%= label_tag(:toggle_on, "Left one!") %>
-    <%= radio_button_tag(:toggle, "off",@trip2) %>
-    <%= label_tag(:toggle_off, "Right one!") %>
-
-
-  <%= radio_button_tag(:toggle, @trip1, ) %>
-    <%= label_tag(:toggle_, "Left one!", :style => "display:inline") %>
-    <%= radio_button_tag(:toggle, @trip2) %>
-    <%= label_tag(:trip2, "Right one!",:style => "display:inline") %>
-    <%= button_tag() %>
-
-
-    <div class = "field">
-      <% hidden_field_tag(:kala, "kiele") %>
-      <%= submit_tag( "Throne for Left one!", name:"title") %>
-    </div>
-  <% end %>
-
-    <%= form_tag("/arenaright", method: "post") do  %>
-    <div class = "field">
-      <% hidden_field_tag(@trip2.id) %>
-      <%= submit_tag("Right one shall rise to the top!") %>
-    </div>
-  <% end %>-->
-
-
   <%= form_tag("/arena", method: "post") do  %>
-
-  <!--<div class="field">
-    <%= label_tag :betterOne,"And the better one is:",  :style => "display:inline" %>
-    <%= select_tag("betterOne", options_from_collection_for_select(@all_trips, 'id' ,'start'), include_blank:false, :style => "display:inline") %>
-  </div>-->
 
   <div class="field">
     <div class="radios" >
@@ -65,10 +16,6 @@
       <%= radio_button_tag(:toggle, @tripIds[1], autofocus: true) %>
     </div>
 
-    <!--<div class="radios" >
-      <%= label_tag(:trip2, "Draw!",:style => "display:inline") %>
-      <%= radio_button_tag(:toggle, -1) %>
-    </div>-->
     <div class="radios" >
       <%= label_tag(:trip2, "Right one!",:style => "display:inline") %>
       <%= radio_button_tag(:toggle, @tripIds[0]) %>
@@ -81,6 +28,7 @@
     <%= submit_tag("Lay down your judgement!") %>
   </div>
 <% end %>
+
 </div>
 <!--______________-->
 <div class="Toka">
