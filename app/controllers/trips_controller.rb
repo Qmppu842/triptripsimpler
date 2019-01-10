@@ -44,18 +44,10 @@ class TripsController < ApplicationController
 
     right.update(elo: right_elo)
     right.save
-    
-    redirect_to :root
+
+    redirect_to :arena
   end
 
-  def arena_results_left
-    byebug
-    @koira = params[:title]
-    redirect_to :arena
-  end
-  def arena_results_right
-    redirect_to :arena
-  end
 
   # GET /trips
   # GET /trips.json
