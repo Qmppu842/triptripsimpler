@@ -80,6 +80,9 @@ document.addEventListener("turbolinks:load", () =>{
 
   $.getJSON('trips.json', (trips) => {
     TRIPS.list = trips
+    TRIPS.sort_by_elo()
+    TRIPS.asc()
+    TRIPS.asc()
     TRIPS.show()
   })
 })
