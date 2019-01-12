@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col align-self-center">
-      <h1 class="display-2">Duel Time!</h1>
+      <h1 class="display-2 text-center">Duel Time!</h1>
     </div>
   </div>
 
@@ -25,47 +25,26 @@
       <%= render partial: "arenacorner" %>
     </div>
     <!--______________-->
-    <div class="col">
+    <div class="col-sm align-self-end">
       <%= form_tag("/arena", method: "post") do  %>
-
-          <div class="btn-group btn-group-toggle" data-toggle="buttons" >
-            <label class=" btn btn-secondary">
+        <div class="asd">
+          <div class="btn-group btn-group-toggle w-100" data-toggle="buttons" >
+            <label class=" btn btn-secondary w-50">
               <%= radio_button_tag(:toggle, @tripIds[1], :name =>"options") %> Left one!
             </label>
-            <label class=" btn btn-secondary">
+            <label class=" btn btn-secondary w-50">
               <%= radio_button_tag(:toggle, @tripIds[0], :name =>"options") %>Right one!
             </label>
           </div>
 
-        <div class = "field">
+        <div class = "field w-100">
           <%= hidden_field_tag("left", @tripIds[0]) %>
           <%= hidden_field_tag("right", @tripIds[1]) %>
-          <%= submit_tag("Lay down your judgement!") %>
+          <%= submit_tag("Lay down your judgement!", :class =>"btn btn-primary w-100") %>
         </div>
+      </div>
       <% end %>
     </div>
-
-
-    <!--<div class="col-2">
-      <%= form_tag("/arena", method: "post") do  %>
-
-          <div class="field radios" >
-            <%= radio_button_tag(:toggle, @tripIds[1], autofocus: true) %>
-            <%= label_tag(:toggle_, "Left one!", {:class =>"btn btn-secondary"}) %>
-            <%= label_tag(:toggle_, "Left one!", :style => "display:inline") %>
-          </div>
-          <div class="field radios" >
-            <%= radio_button_tag(:toggle, @tripIds[0]) %>
-            <%= label_tag(:trip2, ("Right one!"+ radio_button_tag(:toggle, @tripIds[0])), {:class =>"btn btn-secondary"}) %>
-          </div>
-
-        <div class = "field">
-          <%= hidden_field_tag("left", @tripIds[0]) %>
-          <%= hidden_field_tag("right", @tripIds[1]) %>
-          <%= submit_tag("Lay down your judgement!") %>
-        </div>
-      <% end %>
-    </div>-->
     <!--______________-->
     <div class="col">
       <% @trip = @trip2 %>
