@@ -48,11 +48,26 @@ class TripsController < ApplicationController
     redirect_to :arena
   end
 
+  def list
+
+
+  end
+
 
   # GET /trips
   # GET /trips.json
   def index
     @trips = Trip.all
+
+    order = params[:order] || 'elo'
+
+    #They are in order of mostlikely to apper but maybe that proable tiny tiny optimization shouldn't be had at cost of code readibilty.
+    @trips = case order
+      when 'elo' then @trips.sort_by{|t| t.elo}
+      when 'start' then @trips.sort_by{|t| t.start}
+      when 'length' then @trips.sort_by{|t| t.length}
+      when 'end' then @trips.sort_by{|t| t.end}
+    end
   end
 
   # GET /trips/1
@@ -92,6 +107,10 @@ class TripsController < ApplicationController
   end
 
   def cut_link(link)
+
+    #TODO:Make this like regex or something and make it "rolling" so that it checks stuff independently each other
+    return link if link.nil?
+    return link if not link.include? "pb="
     return link.split("pb=")[1].split("\" w")[0]
   end
 

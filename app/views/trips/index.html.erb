@@ -5,10 +5,10 @@
 <table>
   <thead>
     <tr>
-      <th>Start</th>
-      <th>End</th>
-      <th>Length</th>
-      <th>Elo</th>
+      <th><%= link_to 'Start', trips_path(order:"start")%></th>
+      <th><%= link_to 'End', trips_path(order:"end")%></th>
+      <th><%= link_to 'Length', trips_path(order:"length")%></th>
+      <th><%= link_to 'Elo', trips_path(order:"elo")%></th>
       <!--<th>Link</th>-->
       <th colspan="3"></th>
     </tr>
