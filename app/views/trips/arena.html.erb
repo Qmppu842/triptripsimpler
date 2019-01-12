@@ -16,16 +16,86 @@
     </div>
   </div>
 
+<!--  <div class="row">
+     Info layer
+    <div class="col text-right">
+      <h3 class="display-4"><%= @trip1.start %></h3>
+      <div class="infobox">
+        <p><%= @trip1.start %></p>
+        <p><%= @trip1.end %></p>
+        <p><%= @trip1.length %> km</p>
+      </div>
+    </div>
+
+    <div class="col-sm text-center no-gutters">
+      <h3 class="display-4">|</h3>
+      <div class="infobox">
+        <p><span class="font-weight-bold">Start point</span></p>
+        <p><span class="font-weight-bold">End point</span></p>
+        <p><span class="font-weight-bold">Length</span></p>
+      </div>
+    </div>
+
+    <div class="col text-left">
+      <h3 class="display-4"><%= @trip2.start %></h3>
+      <div class="infobox">
+
+        <p><%= @trip2.start %></p>
+        <p><%= @trip2.end %></p>
+        <p><%= @trip2.length %> km</p>
+      </div>
+    </div>
+  </div>
+-->
+  <div class="row align-self-center">
+    <div class="col align-self-center">
+      <table class="table table-hover table-sm text-center">
+        <thead class="align-self-center">
+          <tr>
+            <th class="text-right w-25"><h3 class="display-4"><%= @trip1.start %></h3></th>
+            <th class="text-center "><h3 class="display-4">|</h3></th>
+            <th class="text-left w-25"><h3 class="display-4"><%= @trip2.start %></h3></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td class="text-right w-25"><%= @trip1.start %></td>
+            <td class="text-center"><span class="font-weight-bold">Start point</span></td>
+            <td class="text-left w-25"><%= @trip2.start %></td>
+          </tr>
+          <tr>
+            <td class="text-right w-25"><%= @trip1.end %></td>
+            <td class="text-center"><span class="font-weight-bold">End point</span></td>
+            <td class="text-left w-25"><%= @trip2.end %></td>
+          </tr>
+          <tr>
+            <td class="text-right w-25"><%= @trip1.length %> km</td>
+            <td class="text-center"><span class="font-weight-bold">Length</span></td>
+            <td class="text-left w-25"><%= @trip2.length %> km</td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+
 <!--______________-->
 
   <div class="row">
-    <div class="col">
-      <!-- This seems rather hacky way to do this, but oh well for now it goes.-->
-      <% @trip = @trip1 %>
-      <%= render partial: "arenacorner" %>
+    <!-- Map layer -->
+    <div class="col w-40">
+      <!-- Left one -->
+      <div class="maps">
+        <% if @trip1.link != nil%>
+          <div>
+            <iframe class="maps" src="https://www.google.com/maps/embed?pb=<%= @trip1.link %>"  frameborder="0">asd</iframe>
+          </div>
+        <% end %>
+      </div>
     </div>
     <!--______________-->
-    <div class="col-sm align-self-end">
+    <div class="col-sm align-self-center">
       <%= form_tag("/arena", method: "post") do  %>
         <div class="asd">
           <div class="btn-group btn-group-toggle w-100" data-toggle="buttons" >
@@ -46,9 +116,15 @@
       <% end %>
     </div>
     <!--______________-->
-    <div class="col">
-      <% @trip = @trip2 %>
-      <%= render partial: "arenacorner" %>
+    <div class="col w-40">
+      <!-- Right one -->
+      <div class="maps">
+        <% if @trip2.link != nil%>
+          <div>
+            <iframe class="maps" src="https://www.google.com/maps/embed?pb=<%= @trip2.link %>"  frameborder="0">asd</iframe>
+          </div>
+        <% end %>
+      </div>
     </div>
 
   </div>
