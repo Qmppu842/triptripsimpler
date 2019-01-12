@@ -1,13 +1,22 @@
-<h1><%= @trip.start %></h1>
-<% if @trip.link != nil%>
-  <div>
-    <iframe class="maps" src="https://www.google.com/maps/embed?pb=<%= @trip.link %>"  frameborder="0">asd</iframe>
+<div class="contender">
+  <h3 class="display-4"><%= @trip.start %></h3>
+  <div class="maps">
+    <% if @trip.link != nil%>
+      <div>
+        <iframe class="maps" src="https://www.google.com/maps/embed?pb=<%= @trip.link %>"  frameborder="0">asd</iframe>
+      </div>
+    <% end %>
   </div>
-<% end %>
-<br/>
-<h3>Info</h3>
-<p>
-<%= @trip.start %> <br/>
-<%= @trip.end %> <br/>
-<%= @trip.length %> <br/>
-</p>
+  <div class="infobox">
+    <h4 class="display-10">Info</h4>
+    <p>
+      <span class="font-weight-bold">Start point:</span> <%= @trip.start %>
+    </p>
+    <p>
+      <span class="font-weight-bold">End point:</span><%= @trip.end %>
+    </p>
+    <p>
+      <span class="font-weight-bold">Length:</span> <%= @trip.length %>
+    </p>
+  </div>
+</div>

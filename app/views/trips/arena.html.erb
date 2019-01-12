@@ -1,39 +1,76 @@
-<h1>Duel Time!</h1>
-
-<!--______________-->
-<div class="row">
-<div class="column">
-  <!-- This seems rather hacky way to do this, but oh well for now it goes.-->
-  <% @trip = @trip1 %>
-  <%= render partial: "arenacorner" %>
-</div>
-<!--______________-->
-<div class="column">
-  <%= form_tag("/arena", method: "post") do  %>
-
-  <div class="field">
-    <div class="radios" >
-      <%= radio_button_tag(:toggle, @tripIds[1], autofocus: true) %>
-        <%= label_tag(:toggle_, "Left one!", :style => "display:inline") %>
-    </div>
-
-    <div class="radios" >
-      <%= radio_button_tag(:toggle, @tripIds[0]) %>
-      <%= label_tag(:trip2, "Right one!",:style => "display:inline") %>
+<div class="container">
+  <div class="row">
+    <div class="col align-self-center">
+      <h1 class="display-2">Duel Time!</h1>
     </div>
   </div>
 
-  <div class = "field">
-    <%= hidden_field_tag("left", @tripIds[0]) %>
-    <%= hidden_field_tag("right", @tripIds[1]) %>
-    <%= submit_tag("Lay down your judgement!") %>
-  </div>
-<% end %>
-</div>
-<!--______________-->
-<div class="column">
-  <% @trip = @trip2 %>
-  <%= render partial: "arenacorner" %>
-</div>
 
+  <div class="row">
+    <div class="col align-self-start">
+      <% if notice %>
+        <div class="alert alert-primary" role="alert">
+          <%= notice %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+<!--______________-->
+
+  <div class="row">
+    <div class="col">
+      <!-- This seems rather hacky way to do this, but oh well for now it goes.-->
+      <% @trip = @trip1 %>
+      <%= render partial: "arenacorner" %>
+    </div>
+    <!--______________-->
+    <div class="col">
+      <%= form_tag("/arena", method: "post") do  %>
+
+          <div class="btn-group btn-group-toggle" data-toggle="buttons" >
+            <label class=" btn btn-secondary">
+              <%= radio_button_tag(:toggle, @tripIds[1], :name =>"options") %> Left one!
+            </label>
+            <label class=" btn btn-secondary">
+              <%= radio_button_tag(:toggle, @tripIds[0], :name =>"options") %>Right one!
+            </label>
+          </div>
+
+        <div class = "field">
+          <%= hidden_field_tag("left", @tripIds[0]) %>
+          <%= hidden_field_tag("right", @tripIds[1]) %>
+          <%= submit_tag("Lay down your judgement!") %>
+        </div>
+      <% end %>
+    </div>
+
+
+    <!--<div class="col-2">
+      <%= form_tag("/arena", method: "post") do  %>
+
+          <div class="field radios" >
+            <%= radio_button_tag(:toggle, @tripIds[1], autofocus: true) %>
+            <%= label_tag(:toggle_, "Left one!", {:class =>"btn btn-secondary"}) %>
+            <%= label_tag(:toggle_, "Left one!", :style => "display:inline") %>
+          </div>
+          <div class="field radios" >
+            <%= radio_button_tag(:toggle, @tripIds[0]) %>
+            <%= label_tag(:trip2, ("Right one!"+ radio_button_tag(:toggle, @tripIds[0])), {:class =>"btn btn-secondary"}) %>
+          </div>
+
+        <div class = "field">
+          <%= hidden_field_tag("left", @tripIds[0]) %>
+          <%= hidden_field_tag("right", @tripIds[1]) %>
+          <%= submit_tag("Lay down your judgement!") %>
+        </div>
+      <% end %>
+    </div>-->
+    <!--______________-->
+    <div class="col">
+      <% @trip = @trip2 %>
+      <%= render partial: "arenacorner" %>
+    </div>
+
+  </div>
 </div>
