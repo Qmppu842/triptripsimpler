@@ -48,57 +48,41 @@
             <td class="text-left "><%= @trip2.length %> km</td>
           </tr>
 
+          <tr>
+            <td class="text-right">
+              <% if @trip1.link != nil%>
+                <iframe class="maps align-self-end" src="https://www.google.com/maps/embed?pb=<%= @trip1.link %>"  frameborder="0"><%= @trip1.start %></iframe>
+              <% end %>
+            </td>
+            <td class="text-center">
+              <%= form_tag("/arena", method: "post") do  %>
+                <div class="asd">
+                  <div class="btn-group btn-group-toggle w-100" data-toggle="buttons" >
+                    <label class=" btn btn-secondary w-50">
+                      <%= radio_button_tag(:toggle, @tripIds[1], :name =>"options") %> Left one!
+                    </label>
+                    <label class=" btn btn-secondary w-50">
+                      <%= radio_button_tag(:toggle, @tripIds[0], :name =>"options") %>Right one!
+                    </label>
+                  </div>
+
+                <div class = "field w-100">
+                  <%= hidden_field_tag("left", @tripIds[0]) %>
+                  <%= hidden_field_tag("right", @tripIds[1]) %>
+                  <%= submit_tag("Lay down your judgement!", :class =>"btn btn-primary w-100") %>
+                </div>
+              </div>
+              <% end %>
+            </td>
+            <td class="text-left ">
+              <% if @trip2.link != nil%>
+                  <iframe class="maps" src="https://www.google.com/maps/embed?pb=<%= @trip2.link %>"  frameborder="0"><%= @trip2.start %></iframe>
+              <% end %>
+            </td>
+          </tr>
+
         </tbody>
       </table>
     </div>
-  </div>
-
-<!--______________-->
-
-  <div class="row">
-    <!-- Map layer -->
-    <div class="col">
-      <!-- Left one -->
-      <div class="maps">
-        <% if @trip1.link != nil%>
-          <div>
-            <iframe class="maps" src="https://www.google.com/maps/embed?pb=<%= @trip1.link %>"  frameborder="0">asd</iframe>
-          </div>
-        <% end %>
-      </div>
-    </div>
-    <!--______________-->
-    <div class="col-sm align-self-center">
-      <%= form_tag("/arena", method: "post") do  %>
-        <div class="asd">
-          <div class="btn-group btn-group-toggle w-100" data-toggle="buttons" >
-            <label class=" btn btn-secondary w-50">
-              <%= radio_button_tag(:toggle, @tripIds[1], :name =>"options") %> Left one!
-            </label>
-            <label class=" btn btn-secondary w-50">
-              <%= radio_button_tag(:toggle, @tripIds[0], :name =>"options") %>Right one!
-            </label>
-          </div>
-
-        <div class = "field w-100">
-          <%= hidden_field_tag("left", @tripIds[0]) %>
-          <%= hidden_field_tag("right", @tripIds[1]) %>
-          <%= submit_tag("Lay down your judgement!", :class =>"btn btn-primary w-100") %>
-        </div>
-      </div>
-      <% end %>
-    </div>
-    <!--______________-->
-    <div class="col">
-      <!-- Right one -->
-      <div class="maps">
-        <% if @trip2.link != nil%>
-          <div>
-            <iframe class="maps" src="https://www.google.com/maps/embed?pb=<%= @trip2.link %>"  frameborder="0">asd</iframe>
-          </div>
-        <% end %>
-      </div>
-    </div>
-
   </div>
 </div>
