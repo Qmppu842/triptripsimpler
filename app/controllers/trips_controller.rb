@@ -19,7 +19,7 @@ class TripsController < ApplicationController
     left = Trip.find_by id: params[:left]
     toggle = params[:toggle]
 
-    k = 100
+    k = 50
     left_elo = left.elo
     right_elo = right.elo
     left_id = left.id
