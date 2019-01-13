@@ -63,7 +63,7 @@ class TripsController < ApplicationController
 
     #They are in order of mostlikely to apper but maybe that proable tiny tiny optimization shouldn't be had at cost of code readibilty.
     @trips = case order
-      when 'elo' then @trips.sort_by{|t| t.elo}
+    when 'elo' then @trips.sort_by{|t| t.elo}.reverse
       when 'start' then @trips.sort_by{|t| t.start}
       when 'length' then @trips.sort_by{|t| t.length}
       when 'end' then @trips.sort_by{|t| t.end}
