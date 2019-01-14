@@ -1,7 +1,7 @@
 class TripsController < ApplicationController
   before_action :set_trip, only: [:show, :edit, :update, :destroy]
 
-  def arena_old
+  def arena
     @trips = Trip.all
 
     #Picks 2 trips at random, can't pick same one twice.
@@ -14,8 +14,7 @@ class TripsController < ApplicationController
     render :arena
   end
 
-  def arena
-    binding.pry
+  def arena_old
     return arena_old if @winner.nil?
 
     @trips = Trip.all
@@ -56,13 +55,6 @@ class TripsController < ApplicationController
       elo_message_winner = left.start.to_s + " gained " + elo_win.round.to_s + " elo"
       elo_message_loser =  right.start.to_s + " lost " + (-1*elo_win).round.to_s + " elo"
 
-      if not @winner.nil? and left_id == @winner.id
-        @win_counter += 1
-      else
-        @winner = left
-        @win_counter = 1
-      end
-
     else
       left_elo = left_elo-elo_lose
       right_elo = right_elo+elo_lose
@@ -70,17 +62,6 @@ class TripsController < ApplicationController
       elo_message_winner = right.start.to_s + " gained " + elo_win.round.to_s + " elo"
       elo_message_loser =  left.start.to_s + " lost " + (-1*elo_win).round.to_s + " elo"
 
-      if not @winner.nil? and right_id == @winner.id
-        @win_counter += 1
-      else
-        @winner = right
-        @win_counter = 1
-      end
-
-    end
-    binding.pry
-    if @win_counter >=10
-      @winner = nil
     end
     left.update(elo: left_elo)
     left.save
