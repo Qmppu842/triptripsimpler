@@ -1,7 +1,7 @@
 class TripsController < ApplicationController
   before_action :set_trip, only: [:show, :edit, :update, :destroy]
 
-  def arena
+  def arena_old
     @trips = Trip.all
 
     #Picks 2 trips at random, can't pick same one twice.
@@ -14,10 +14,25 @@ class TripsController < ApplicationController
     render :arena
   end
 
+  def arena
+    binding.pry
+    return arena_old if @winner.nil?
+
+    @trips = Trip.all
+
+    @trip1 = @winner
+
+    @trip2 = @trips.sample;
+
+    @all_trips= [@trip1, @trip2]
+    @tripIds = @all_trips.map { |e| e.id  }
+    render :arena
+  end
+
   def save_arena_results
     right = Trip.find_by id: params[:right]
     left = Trip.find_by id: params[:left]
-    toggle = params[:toggle]
+    toggle = params[:toggle].to_i
 
     k = 50
     left_elo = left.elo
@@ -33,12 +48,20 @@ class TripsController < ApplicationController
     elo_message_winner = ""
     elo_message_loser = ""
 
+
     if toggle == left_id
       left_elo = left_elo+ elo_win
       right_elo = right_elo-elo_win
 
       elo_message_winner = left.start.to_s + " gained " + elo_win.round.to_s + " elo"
       elo_message_loser =  right.start.to_s + " lost " + (-1*elo_win).round.to_s + " elo"
+
+      if not @winner.nil? and left_id == @winner.id
+        @win_counter += 1
+      else
+        @winner = left
+        @win_counter = 1
+      end
 
     else
       left_elo = left_elo-elo_lose
@@ -47,6 +70,17 @@ class TripsController < ApplicationController
       elo_message_winner = right.start.to_s + " gained " + elo_win.round.to_s + " elo"
       elo_message_loser =  left.start.to_s + " lost " + (-1*elo_win).round.to_s + " elo"
 
+      if not @winner.nil? and right_id == @winner.id
+        @win_counter += 1
+      else
+        @winner = right
+        @win_counter = 1
+      end
+
+    end
+    binding.pry
+    if @win_counter >=10
+      @winner = nil
     end
     left.update(elo: left_elo)
     left.save
@@ -56,7 +90,7 @@ class TripsController < ApplicationController
 
     elo_message = elo_message_winner + " and " + elo_message_loser
 
-    redirect_to :arena, notice: elo_message
+    redirect_to :arena, notice: elo_message, :winner => "plaaa"
   end
 
   def list

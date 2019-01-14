@@ -7,5 +7,6 @@ Rails.application.routes.draw do
 
   get 'triplist', to: 'trips#list'
 
+  get 'arenaold', to:'trips#arena_old'
 
 end
